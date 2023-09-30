@@ -13,6 +13,16 @@ variable "kube_version" {
     type = string
 }
 
+variable "cluster_vpc" {}
+
+variable "private_subnet_1a" {}
+
+variable "private_subnet_1b" {}
+
+variable "eks_cluster" {}
+
+variable "eks_cluster_sg" {}
+
 variable "nodes_instances_sizes" {
     description = "Tipo de instancia"
     type = tuple([ string ])
