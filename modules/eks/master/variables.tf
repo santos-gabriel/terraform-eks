@@ -12,3 +12,9 @@ variable "kube_version" {
     description = "Versão do Kubernetes"
     type = string
 }
+
+variable "cluster_vpc" {}
+
+variable "private_subnet_1a" {}
+
+variable "private_subnet_1b" {}
