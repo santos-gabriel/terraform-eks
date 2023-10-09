@@ -4,8 +4,10 @@ resource "aws_eks_node_group" "cluster" {
     node_role_arn       = aws_iam_role.eks_nodes_roles.arn
 
     subnet_ids          = [
-        var.private_subnet_1a.id,
-        var.private_subnet_1b.id
+        # var.private_subnet_1a.id,
+        # var.private_subnet_1b.id
+        var.public_subnet_1a.id,
+        var.public_subnet_1b.id
     ]
 
     instance_types      = var.nodes_instances_sizes

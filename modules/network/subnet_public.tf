@@ -6,7 +6,8 @@ resource "aws_subnet" "public_subnet_1a" {
 
     tags = {
         Name = format("%s-public-1a", var.cluster_name),
-        "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+        "kubernetes.io/cluster/${var.cluster_name}" = "shared",
+        "kubernetes.io/role/elb" = "1"
     }
 }
 
@@ -18,7 +19,8 @@ resource "aws_subnet" "public_subnet_1b" {
 
     tags = {
         Name = format("%s-public-1b", var.cluster_name),
-        "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+        "kubernetes.io/cluster/${var.cluster_name}" = "shared",
+        "kubernetes.io/role/elb" = "1"
     }
 }
 

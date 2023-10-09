@@ -11,8 +11,10 @@ module "master" {
     kube_version      = var.kube_version
     
     cluster_vpc       = module.network.cluster_vpc
-    private_subnet_1a = module.network.private_subnet_1a
-    private_subnet_1b = module.network.private_subnet_1b
+    # private_subnet_1a = module.network.private_subnet_1a
+    # private_subnet_1b = module.network.private_subnet_1b
+    public_subnet_1a = module.network.public_subnet_1a
+    public_subnet_1b = module.network.public_subnet_1b
 }
 
 module "nodes" {
@@ -22,8 +24,10 @@ module "nodes" {
     kube_version      = var.kube_version
     
     cluster_vpc       = module.network.cluster_vpc
-    private_subnet_1a = module.network.private_subnet_1a
-    private_subnet_1b = module.network.private_subnet_1b
+    # private_subnet_1a = module.network.private_subnet_1a
+    # private_subnet_1b = module.network.private_subnet_1b
+    public_subnet_1a = module.network.public_subnet_1a
+    public_subnet_1b = module.network.public_subnet_1b
 
     eks_cluster       = module.master.eks_cluster
     eks_cluster_sg    = module.master.security_group
