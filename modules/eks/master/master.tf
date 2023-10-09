@@ -9,8 +9,8 @@ resource "aws_eks_cluster" "eks_cluster" {
         ]
 
         subnet_ids = [ 
-            var.private_subnet_1a.id, 
-            var.private_subnet_1b.id
+            var.public_subnet_1a.id, 
+            var.public_subnet_1b.id
         ]
     }
 

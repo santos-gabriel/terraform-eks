@@ -3,7 +3,9 @@ resource "aws_security_group" "cluster_master_sg" {
     vpc_id = var.cluster_vpc.id
 
     egress {
-        #Se você selecionar um protocolo de -1(semanticamente equivalente a all, que não é um valor válido aqui), deverá especificar a from_porte to_portigual a 0
+        #Se você selecionar um protocolo de -1
+        # (semanticamente equivalente a all, que não é um valor válido aqui), 
+        # deverá especificar a from_porte to_portigual a 0
         protocol = "-1"
         from_port   = 0
         to_port     = 0
