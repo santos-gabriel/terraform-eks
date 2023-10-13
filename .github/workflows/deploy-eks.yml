@@ -44,7 +44,7 @@ jobs:
           # terraform plan -var-file="ambientes/hom.tfvars" -out=plan
           terraform apply -var-file="ambientes/hom.tfvars" --auto-approve
         elif [[ "${{ steps.config.outputs.action }}" == "destroy" ]]; then
-          terraform destroy -auto-approve
+          terraform destroy --auto-approve
         else
           echo "Invalid action specified in configuration file."
           exit 1
