@@ -13,11 +13,20 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v2
 
+    - name: Get Branch Name
+      id: branch
+      run: echo "::set-output name=branch::$(echo $GITHUB_REF | awk -F'/' '{print $NF}')"
+      shell: bash
+
+    - name: Show Branch Name
+      run: echo "Current branch name is ${{ steps.branch.outputs.branch }}"
+ 
     - name: Create PR
       run: |
+        BRANCH_NAME=${{ steps.branch.outputs.branch }} 
         GITHUB_TOKEN=${{ secrets.CI_CD }}
         BASE_BRANCH=main  # Branch de destino
-        HEAD_BRANCH=feature  # Branch de origem
+        HEAD_BRANCH=BRANCH_NAME  # Branch de origem
         PR_TITLE="Auto-generated PR"
         PR_BODY="This PR was automatically created from a feature branch."
         API_URL="https://api.github.com/repos/$GITHUB_REPOSITORY/pulls"
