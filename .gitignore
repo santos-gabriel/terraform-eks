@@ -2,4 +2,6 @@
 terraform.*
 .terraform.*
 .terraform
+plan
+
 
