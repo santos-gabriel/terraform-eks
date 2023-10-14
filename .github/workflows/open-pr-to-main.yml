@@ -13,15 +13,15 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v2
     
-    - name: Install hub
-      run: |
-        sudo apt-get update -q
-        sudo apt-get install -yq jq
-        curl -fsSL https://github.com/github/hub/releases/download/v2.14.2/hub-linux-amd64-2.14.2.tgz -o hub.tgz
-        tar -zxf hub.tgz
-        sudo ./hub-linux-amd64-2.14.2/install
-        rm -rf hub.tgz hub-linux-amd64-2.14.2
-      shell: bash
+    # - name: Install hub
+    #   run: |
+    #     sudo apt-get update -q
+    #     sudo apt-get install -yq jq
+    #     curl -fsSL https://github.com/github/hub/releases/download/v2.14.2/hub-linux-amd64-2.14.2.tgz -o hub.tgz
+    #     tar -zxf hub.tgz
+    #     sudo ./hub-linux-amd64-2.14.2/install
+    #     rm -rf hub.tgz hub-linux-amd64-2.14.2
+    #   shell: bash
 
     - name: Create PR
       env:
