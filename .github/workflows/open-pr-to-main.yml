@@ -15,7 +15,9 @@ jobs:
 
     - name: Get Branch Name
       id: branch
-      run: echo "::set-output name=branch::$(echo $GITHUB_REF | awk -F'/' '{print $NF}')"
+      run: | 
+        BRANCH_NAME=${GITHUB_REF#refs/heads/}
+        echo "::set-output name=branch::${BRANCH_NAME}"
       shell: bash
 
     - name: Show Branch Name
