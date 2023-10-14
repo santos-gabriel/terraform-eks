@@ -44,7 +44,7 @@ jobs:
     - name: Execute Terraform
       run: |
         if [[ "${{ steps.config.outputs.action }}" == "create" ]]; then
-          # terraform plan -var-file="ambientes/hom.tfvars" -out=plan
+          terraform plan -var-file="ambientes/hom.tfvars" -out=plan
           terraform apply -input=false -out=plan --auto-approve
         elif [[ "${{ steps.config.outputs.action }}" == "destroy" ]]; then
           terraform destroy -var-file="ambientes/hom.tfvars" --auto-approve
