@@ -1,0 +1,19 @@
+name: Auto Create PR
+
+on:
+  push:
+    branches:
+      - feature/*  # A branch de origem da qual deseja criar um PR
+
+jobs:
+  create_pr:
+    runs-on: self-hosted
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Create PR
+      env:
+        GITHUB_TOKEN: ${{ secrets.CI_CD }}
+      run: |
+        hub pr create -b main -h $GITHUB_REPOSITORY -t "Automated PR from feature branch" -m "This PR was automatically created from a feature branch."
