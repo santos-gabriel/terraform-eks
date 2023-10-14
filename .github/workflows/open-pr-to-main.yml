@@ -3,7 +3,7 @@ name: Create PR on Push to Feature Branch
 on:
   push:
     branches:
-      - feature
+      - feature/*
 
 jobs:
   create_pr:
