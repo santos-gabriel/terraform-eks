@@ -7,24 +7,24 @@ on:
 
 jobs:
   create_pr:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
     - name: Check out code
       uses: actions/checkout@v2
-    
-    # - name: Install hub
-    #   run: |
-    #     sudo apt-get update -q
-    #     sudo apt-get install -yq jq
-    #     curl -fsSL https://github.com/github/hub/releases/download/v2.14.2/hub-linux-amd64-2.14.2.tgz -o hub.tgz
-    #     tar -zxf hub.tgz
-    #     sudo ./hub-linux-amd64-2.14.2/install
-    #     rm -rf hub.tgz hub-linux-amd64-2.14.2
-    #   shell: bash
 
     - name: Create PR
-      env:
-        GITHUB_TOKEN: ${{ secrets.CI_CD }}
       run: |
-        hub pr create -b main -h $GITHUB_REPOSITORY -t "Automated PR from feature branch" -m "This PR was automatically created from a feature branch."
+        GITHUB_TOKEN=${{ secrets.CI_CD }}
+        BASE_BRANCH=main  # Branch de destino
+        HEAD_BRANCH=feature  # Branch de origem
+        PR_TITLE="Auto-generated PR"
+        PR_BODY="This PR was automatically created from a feature branch."
+        API_URL="https://api.github.com/repos/$GITHUB_REPOSITORY/pulls"
+
+        RESPONSE=$(curl -X POST -s -H "Authorization: token $GITHUB_TOKEN" -d "{\"title\":\"$PR_TITLE\",\"body\":\"$PR_BODY\",\"base\":\"$BASE_BRANCH\",\"head\":\"$HEAD_BRANCH\"}" $API_URL)
+
+        echo "PR URL: $(echo $RESPONSE | jq -r .html_url)"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      shell: bash
