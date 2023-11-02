@@ -1,4 +1,4 @@
-cluster_name = "eksaws-paulo"
+cluster_name = "eks"
 aws_region   = "us-east-1"
 kube_version = "1.27"
 nodes_instances_sizes = ["t2.micro"]
