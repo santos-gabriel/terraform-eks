@@ -11,6 +11,24 @@ data "aws_iam_policy_document" "eks_nodes_role" {
     }
 }
 
+resource "aws_iam_policy" "secrets_manager_policy" {
+  name        = "secrets-manager-policy"
+  
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action   = ["secretsmanager:GetResourcePolicy",
+      "secretsmanager:GetSecretValue",
+      "secretsmanager:DescribeSecret",
+      "secretsmanager:ListSecretVersionIds"],
+        Effect   = "Allow",
+        Resource = "*"
+      }
+    ]
+  })
+}
+
 resource "aws_iam_role" "eks_nodes_roles" {
     name = format("%s-eks-nodes", var.cluster_name)
     assume_role_policy = data.aws_iam_policy_document.eks_nodes_role.json
@@ -28,5 +46,10 @@ resource "aws_iam_role_policy_attachment" "node" {
 
 resource "aws_iam_role_policy_attachment" "ecr" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+  role = aws_iam_role.eks_nodes_roles.name
+}
+
+resource "aws_iam_role_policy_attachment" "secrets_manager" {
+  policy_arn = aws_iam_policy.secrets_manager_policy.arn
   role = aws_iam_role.eks_nodes_roles.name
 }
